@@ -24,7 +24,7 @@ class GetMostChangedCurrencyCommandHandler implements GetMostChangedCurrencyComm
     {
         $currencies = $this->currencyRepository->findAll();
         usort($currencies, function(Currency $a, Currency $b){
-            return $b->getDailyChangePercent() <=> $a->getDailyChangePercent();
+            return abs($b->getDailyChangePercent()) <=> abs($a->getDailyChangePercent());
         });
         return array_shift($currencies);
     }
